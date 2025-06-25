@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8" />
+   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+   <title>Scry Pi Net - Schubert.Dev</title>
+   <link rel="stylesheet" href="../assets/styles.css">
+</head>
+
+<body>
+   <header>
+      <h1>Portfolio</h1>
+      <p><a href="../">Home</a></p>
+   </header>
+
+   <main>
+      <section>
+         <h2>Distributed Internet Monitoring Proof of Concept</h2>
+
+         <h3>The Challenge</h3>
+         <p>A global organization needs to quantify problematic internet at remote locations. The original plan was for
+            BigQuery + PowerBI integration, but organizational momentum was lacking until there was a working proof of
+            concept.</p>
+
+         <h3>My Approach: Spike Solution</h3>
+         <p>I built a rapid prototype using existing open-source components, focusing on <strong>decision-making over
+               perfection</strong>.</p>
+
+         <h3>Key Decisions Made</h3>
+         <ul>
+            <li><strong>Leverage Existing Work:</strong> Started with Geerling's internet-pi project (90% of what we
+               needed), focused on the missing 10%: distributed data collection and automated updates</li>
+            <li><strong>Skip PowerBI Integration:</strong> Early scope decision: PowerBI interface was outside efficient
+               development scope. Chose Looker Studio for visualization POC (faster to implement)</li>
+            <li><strong>Use Personal Google Account:</strong> Organization lacked access/approval for me. Built
+               proof of concept with personal account to demonstrate value</li>
+            <li><strong>Optimize for Data Volume:</strong> Initial version: 10,000 records per night (unusable).
+               Solution: Single record per device every 5 minutes with unique device IDs</li>
+         </ul>
+
+         <h3>Technical Challenges & Quick Wins</h3>
+         <ul>
+            <li><strong>DNS Breaking on Install:</strong> Problem: Playbook broke DNS resolution. Solution: Check for
+               systemd-resolved symlink before modifying resolv.conf. <strong>Decision:</strong> Fix the immediate
+               blocker, not redesign the system</li>
+            <li><strong>Container Health Checks:</strong> Problem: Services marked unhealthy despite running. Solution:
+               Adjusted health check parameters. <strong>Decision:</strong> Make it work, not perfect</li>
+            <li><strong>Credential Management:</strong> Problem: Complex setup process. Solution: Interactive script
+               with secure defaults. <strong>Decision:</strong> Good enough for PoC, improve later</li>
+         </ul>
+
+         <h3>Results</h3>
+         <ul>
+            <li><strong>Working prototype</strong> in 2 weeks</li>
+            <li><strong>Data flowing</strong> to BigQuery from multiple locations</li>
+            <li><strong>Visualization</strong> in Looker Studio</li>
+            <li><strong>Automated updates</strong> via systemd service</li>
+         </ul>
+
+         <h3>Lessons for Rapid Prototyping</h3>
+         <ul>
+            <li><strong>Scope Aggressively:</strong> PowerBI integration would have taken me weeks to learn. Looker
+               Studio took hours. <strong>Decision:</strong> Prove value first, polish later</li>
+            <li><strong>Use What Works:</strong> Geerling's project handled 90% of requirements. Focused on the unique
+               10% (distributed collection). <strong>Decision:</strong> Don't rebuild, extend</li>
+            <li><strong>Accept Technical Debt:</strong> GitHub Actions for CI/CD (unsuitable for production, but
+               terrific for getting rapid feedback). Personal Google account for BigQuery. <strong>Decision:</strong>
+               Get it working, production concerns come later</li>
+            <li><strong>Get something working early:</strong> 10,000 overnight records → lead to implementing 1 record
+               per device per 5 minutes. Discover issues fast!</li>
+         </ul>
+
+         <h3>Impact</h3>
+         <p>The proof of concept demonstrated:</p>
+         <ul>
+            <li><strong>Feasibility</strong> of distributed monitoring</li>
+            <li><strong>Value</strong> of centralized data collection</li>
+            <li><strong>Need</strong> for organizational support</li>
+         </ul>
+
+         <h3>Next Steps</h3>
+         <ul>
+            <li>Simplify installation process</li>
+            <li>Move to organizational Google account</li>
+            <li>Production-ready CI/CD pipeline</li>
+         </ul>
+
+         <h3>Key Takeaway</h3>
+         <p><strong>Proof of concepts should prove visible value, not perfection.</strong> Focus on the critical path,
+            accept technical debt, and optimize for demonstration over production readiness.</p>
+
+         <h3>Resources</h3>
+         <ul>
+            <li><a href="https://github.com/roguisharcanetrickster/internet-pi" target="_blank">GitHub repository</a>
+            </li>
+            <li><a href="https://github.com/roguisharcanetrickster/custom-metrics" target="_blank">Custom metrics
+                  repository</a></li>
+         </ul>
+      </section>
+   </main>
+
+   <footer>
+      &copy; 2025 Schubert.Dev — Made with purpose.
+   </footer>
+</body>
+
+</html>
