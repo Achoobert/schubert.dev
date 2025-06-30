@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Shorts Hell</title>
+   <style>
+      body {
+         transition: background 0.1s;
+         text-align: center;
+         font-family: sans-serif;
+         margin: 0;
+         padding: 0;
+      }
+
+      .container {
+         margin-top: 10vh;
+      }
+
+      .btn {
+         font-size: 1.5rem;
+         padding: 1em 2em;
+         margin: 1em;
+         border: none;
+         border-radius: 8px;
+         background: #222;
+         color: #fff;
+         cursor: pointer;
+         transition: background 0.2s;
+      }
+
+      .btn:hover {
+         background: #444;
+      }
+
+      a.home-link {
+         display: inline-block;
+         margin-top: 2em;
+         font-size: 1.2rem;
+         color: #0077cc;
+         text-decoration: none;
+      }
+
+      a.home-link:hover {
+         text-decoration: underline;
+      }
+   </style>
+</head>
+
+<body>
+   <div class="container">
+      <h1>Welcome to Shorts Hell</h1>
+      <button id="startBtn" class="btn">Start Hell Mode</button>
+      <button id="stopBtn" class="btn" style="display:none;">Stop Hell Mode</button>
+      <br>
+      <a href="/" class="home-link">&larr; Back to Home</a>
+   </div>
+   <audio id="hellAudio"
+      src="https://s3.ap-southeast-2.amazonaws.com/schubert.dev.assets/shorts_hell.ogg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIA23WHUDT226524LNV%2F20250630%2Fap-southeast-2%2Fs3%2Faws4_request&X-Amz-Date=20250630T132535Z&X-Amz-Expires=300&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEMb%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaDmFwLXNvdXRoZWFzdC0yIkcwRQIgbPlTrbu1od653teK9r0whVstxMGZWlHhYOQin8tQ6E4CIQCLF7dMHSwAVlUxlSGUoO7liBeq36roQ8BVpg4LAnofLirkAgi%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F8BEAAaDDc0NjY2OTIxOTA2MSIMwLl6vTeiF3o7O88ZKrgCd7mzLSnC96D2skrupPjXMN7mAHqGBN5ejogZVv5IRcckwxlXWbfW8r3crik%2B7aLczLBMfOq7cJsbs3B6hG69q%2FB8CfsP%2FklgOueD76YxyX4PiRf6et9pHy482dMFxO5djdhXPF3g8pTwf30w%2BNsb4XNXU7eRdk8z1sWaF57H0gaeUezW%2B0BCoxGer9eYMfJr4VnEdIiBTTH4IFCc%2FxvdySYN6yl0ssQrsJCalj%2Fcc8DmAiRoMKqwXdOuLhZhXINaUC0OtuWzWeyvbwOR%2F4QYRiJGZ%2FnoGK%2Bmb3aTweO9AQ5dBk4jls%2FJW7TpS12IR6zsuf3R8pKdb%2BhiD0N4sauUC1Oz5X%2Fqd8%2FBokrnHOwVbznfyHvEPu%2FMK%2F8JAVYQlcriphcaN41qqmqsMJE26yJWwJDEDHbcxkyFMPTFiMMGOq0Ce5CURmh1EWYxPxISy1C5OjXp0WCphU75Uzxsq02HeRCvgwfwF7DJswLLvsuH4XDqKjdxx1y1lMwETZ4qkfUEG5GJg6n4q5yrJbDQffjr9EtmrVcc%2FRxrE1gTgZKKmwV4hRLptFLCR5jqknBQQC3fkigmujCimlQ3v48sbaL3%2BO22galc1LtOKacRMu03NESoz4cfdiG1zsZgERMKy7SRHnrIOOVLYe5l7MjZ2nNZBfFma2fZNiyPNDw1vCDwaOO8SBEcztVNj1T4EJus6%2F25nEm19%2B6Htb4o%2Bajeted4JQ5mHk%2FYYld7QrduNpydeLAEwhCn4tF0r6PiH1C2JSPLG6uPFyLvaXqQVub0mUQ2PUoVMJdhQKxOgmY4oE0iWsUNLZv%2Fck0RQd6zLf7VtA%3D%3D&X-Amz-Signature=c4ebe2c7eba575b705c66fd4bc99f9d7804686ccc6bcde80dd8df48b98daca5f&X-Amz-SignedHeaders=host&response-content-disposition=inline"
+      preload="auto"></audio>
+   <script>
+      const startBtn = document.getElementById('startBtn');
+      const stopBtn = document.getElementById('stopBtn');
+      const audio = document.getElementById('hellAudio');
+      let flashing = false;
+      let flashInterval = null;
+
+      function randomColor() {
+         return `rgb(${Math.floor(Math.random() * 256)},${Math.floor(Math.random() * 256)},${Math.floor(Math.random() * 256)})`;
+      }
+
+      function startHell() {
+         if (flashing) return;
+         flashing = true;
+         startBtn.style.display = 'none';
+         stopBtn.style.display = '';
+         audio.currentTime = 0;
+         audio.loop = true;
+         audio.play();
+         flashInterval = setInterval(() => {
+            document.body.style.background = randomColor();
+         }, 80);
+      }
+
+      function stopHell() {
+         if (!flashing) return;
+         flashing = false;
+         startBtn.style.display = '';
+         stopBtn.style.display = 'none';
+         audio.pause();
+         document.body.style.background = '';
+         clearInterval(flashInterval);
+      }
+
+      startBtn.addEventListener('click', startHell);
+      stopBtn.addEventListener('click', stopHell);
+   </script>
+</body>
+
+</html>
