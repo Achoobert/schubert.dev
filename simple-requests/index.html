@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8" />
+   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+   <title>Scry Pi Net - Schubert.Dev</title>
+   <link rel="stylesheet" href="../assets/styles.css">
+</head>
+
+<body>
+   <header>
+      <h1>Portfolio</h1>
+      <p><a href="../">Home</a></p>
+   </header>
+
+   <main>
+      <section>
+         <h2>Simple Requests module for FoundryVTT</h2>
+         <p><a href="https://github.com/Achoobert/FoundryVTT-Simple-requests/releases" target="_blank">Releases</a> | <a
+               href="https://foundryvtt.com/packages/simple-requests" target="_blank">FoundryVTT Package</a></p>
+         <p>Simple Requests is a module I have started to maintain for the Foundry Virtual Tabletop platform. It's
+            forked from <code>advance requests</code> by Nazgob. His version was not updated past <code>v11</code>, and
+            what started as a simple "fork and update" turned into a very different project. The original had a lot of
+            integrations with his (paid) visual novel mod. But aside from that there was a lot of pop-ups that players
+            would get, and I would have to go in and do a lot of work to select the correct photos. In order to save a
+            few seconds of later work, I spent hours on this mod.</p>
+         <h3>What does it do?</h3>
+         <p>It introduces a streamlined "Requests" system that allows players to signal their desire to speak during a
+            session, using three levels of urgency (Common, Important, Urgent). This helps GMs manage table talk and
+            ensures everyone gets a chance to contribute, without disrupting the flow of the game.</p>
+         <ul>
+            <li>Real-time, synchronized request queue for all players and the GM</li>
+            <li>Three request levels, each with customizable audio cues</li>
+            <li>Intuitive UI integrated into the FoundryVTT chat sidebar</li>
+            <li>Accessibility and customization options for both players and GMs</li>
+            <li>"Epic prompt" GM can visually alerting all users</li>
+         </ul>
+         <p>See the project on GitHub: <a href="https://github.com/achoobert/FoundryVTT-Simple-requests"
+               target="_blank">https://github.com/achoobert/FoundryVTT-Simple-requests</a></p>
+         <h3>Tech highlights</h3>
+         <h4>Cross-Platform UI Consistency:</h4>
+         <p>Ensured the request queue UI worked seamlessly across different FoundryVTT versions (v12, v13), handling
+            changes in DOM structure, sidebar behavior, and chat input placement.</p>
+         <h4>CSS & Layout Debugging:</h4>
+         <p>Resolved complex issues with flex and grid layouts, including handling
+            <code>flex-direction: column-reverse</code>, sticky positioning, and ensuring the request queue always
+            appeared in the correct place regardless of sidebar state or visibility of other elements.</p>
+         <h4>Robust Event Handling:</h4>
+         <p>Debugged and fixed right-click (<code>contextmenu</code>) event handling for removing requests, ensuring
+            correct user permissions and reliable DOM updates.</p>
+         <h3>Automated Testing:</h3>
+         <p>After about 10 manual tests, I got annoyed and got Cypress end-to-end tests working, (meaning handling
+            asynchronous UI updates, dynamic selectors, and ensuring tests worked with both versions of Foundry)</p>
+         <h4>Modern Release Automation:</h4>
+         <p>Refactored a GitHub Actions workflow I found, simplifying the release process.</p>
+         <h4>Settings & Customization:</h4>
+         <p>Greatly simplified user and GM settings for sound, image, and queue behavior, including using a smart
+            default for audio volume based on user interface settings.</p>
+         <h4>Codebase Refactoring & Best Practices:</h4>
+         <p>Modularized the code, improved maintainability, and adopted best practices from other successful FoundryVTT
+            modules (raise-my-hand, dice-tray). I really like the original design, but bro did not have his queue logic
+            working correctly. I moved the queue management logic away from the socket IO and UI management, because I'm
+            lazy and that made debugging easier.</p>
+      </section>
+   </main>
+
+   <footer>
+      &copy; 2025 Schubert.Dev — Made with purpose.
+   </footer>
+</body>
+
+</html>
